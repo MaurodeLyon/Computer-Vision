@@ -17,20 +17,16 @@ namespace Rasterizer
 
         public Vector3(float x, float y, float z)
         {
-            data = new float[4];
+            data = new float[3];
             this.x = x;
             this.y = y;
             this.z = z;
-            data[3] = 1;
         }
 
 
         public Vector3 normalize()
         {
-            float length = (float)Math.Sqrt(x * x + y * y + z * z);
-            Vector3 result = new Vector3(x / length, y / length, z / length);
-
-            return result;
+            return new Vector3(this.x / length, this.y / length, this.z / length);
         }
 
         public static Vector3 operator *(Vector3 vec, float f)
