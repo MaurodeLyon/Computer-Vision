@@ -24,8 +24,31 @@ namespace Rasterizer
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            loadCone();
+            loadCilinder();
+            //loadCone();
             //loadKube();
+        }
+
+        private void loadCilinder()
+        {
+            vertices.Add(new Vector3(0, 10, 0));
+
+            vertices.Add(new Vector3(0, 0, 5));
+            vertices.Add(new Vector3(2, 0, 4));
+            vertices.Add(new Vector3(4, 0, 2));
+
+            vertices.Add(new Vector3(5, 0, 0));
+            vertices.Add(new Vector3(4, 0, -2));
+            vertices.Add(new Vector3(2, 0, -4));
+
+            vertices.Add(new Vector3(0, 0, -5));
+            vertices.Add(new Vector3(-2, 0, -4));
+            vertices.Add(new Vector3(-4, 0, -2));
+                
+            vertices.Add(new Vector3(-5, 0, 0));
+            vertices.Add(new Vector3(-4, 0, 2));
+            vertices.Add(new Vector3(-2, 0, 4));
+
         }
         private void loadCone()
         {
