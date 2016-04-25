@@ -1,22 +1,38 @@
-#include <GL/freeglut.h>
-#include <cstdio>
+#define STB_IMAGE_IMPLEMENTATION
 #define _USE_MATH_DEFINES
+
+#include <cstdio>
 #include <cmath>
+#include <GL/freeglut.h>
+#include <math.h>
+
+#include "stb_image.h"
+#include <math.h>
+
 
 struct Camera
 {
 	float posX = 0;
+	float posY = 0;
 	float posZ = -4;
 	float rotX = 0;
 	float rotY = 0;
+	float speedY = 0;
 } camera;
 bool keys[255];
 float lastFrameTime = 0;
 int width, height;
-
+unsigned int grass_texture_id;
+unsigned int atlas_texture_id;
 
 void drawCube()
 {
+	float x1 = (1 % 16) * (1 / 16);
+	float y1 = (1 / 16) * (1 / 16);
+	float x2 = x1 + (1 / 16);
+	float y2 = y1 + (1 / 16);
+
+	glEnable(GL_TEXTURE_2D);
 	glBegin(GL_QUADS);
 	glColor3f(1, 0, 0);
 	glVertex3f(-1, -1, -1);
@@ -54,32 +70,33 @@ void drawCube()
 	glVertex3f(1, 1, 1);
 	glVertex3f(-1, 1, 1);
 	glEnd();
+	//glDisable(GL_TEXTURE_2D);
 }
 
 void display()
 {
-	glClearColor(0.6f, 0.6f, 1, 1);
+	glClearColor(0.0f, 0.5f, 1.0f, 1);
 	glClear(GL_DEPTH_BUFFER_BIT | GL_COLOR_BUFFER_BIT);
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(60.0f, (float)width/height, 0.1, 30);
+	gluPerspective(90.0f, (float)width / height, 0.1, 30);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
 	glRotatef(camera.rotX, 1, 0, 0);
 	glRotatef(camera.rotY, 0, 1, 0);
-	glTranslatef(camera.posX, 0, camera.posZ);
+	glTranslatef(camera.posX, camera.posY, camera.posZ);
 
-
-	glColor3f(0.1f, 1.0f, 0.2f);
+	glBindTexture(GL_TEXTURE_2D, grass_texture_id);
 	glBegin(GL_QUADS);
-		glVertex3f(-15, -1, -15);
-		glVertex3f( 15, -1, -15);
-		glVertex3f( 15, -1,  15);
-		glVertex3f(-15, -1,  15);
+	glColor3f(1, 1, 1);
+	glTexCoord2f(0, 0); glVertex3f(-15, -1, -15);
+	glTexCoord2f(1, 0); glVertex3f(15, -1, -15);
+	glTexCoord2f(1, 1); glVertex3f(15, -1, 15);
+	glTexCoord2f(0, 1); glVertex3f(-15, -1, 15);
 	glEnd();
-
+	glDisable(GL_TEXTURE_2D);
 	for (int x = -10; x <= 10; x += 5)
 	{
 		for (int y = -10; y <= 10; y += 5)
@@ -102,15 +119,21 @@ void move(float angle, float fac)
 
 void idle()
 {
-	float frameTime = glutGet(GLUT_ELAPSED_TIME)/1000.0f;
+	float frameTime = glutGet(GLUT_ELAPSED_TIME) / 1000.0f;
 	float deltaTime = frameTime - lastFrameTime;
 	lastFrameTime = frameTime;
 
-	const float speed = 3;
+	const float speed = 5;
 	if (keys['a']) move(0, deltaTime*speed);
 	if (keys['d']) move(180, deltaTime*speed);
 	if (keys['w']) move(90, deltaTime*speed);
 	if (keys['s']) move(270, deltaTime*speed);
+	if (camera.posY == 0) if (keys[' '])  camera.speedY = 4;
+
+	camera.posY -= camera.speedY * deltaTime;		//jump
+	if (camera.posY > 0)							//ground collision
+		camera.posY = 0;
+	camera.speedY -= 9.81 * deltaTime;				//gravity
 
 	glutPostRedisplay();
 }
@@ -134,7 +157,7 @@ void keyboard(unsigned char key, int, int)
 	keys[key] = true;
 }
 
-void keyboardUp(unsigned char key, int,int)
+void keyboardUp(unsigned char key, int, int)
 {
 	keys[key] = false;
 }
@@ -142,12 +165,47 @@ void keyboardUp(unsigned char key, int,int)
 int main(int argc, char* argv[])
 {
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
-	glutInitWindowSize(800, 600);
+	glutInitWindowSize(1024, 768);
 	glutInit(&argc, argv);
-	glutCreateWindow("Hello World");
+	glutCreateWindow("Maurocraft");
 
 	memset(keys, 0, sizeof(keys));
 	glEnable(GL_DEPTH_TEST);
+
+	int img_width, img_height, bpp;
+	unsigned char* imgData = stbi_load("grass_grass_0099_02_preview.jpg", &img_width, &img_height, &bpp, 4);
+	glGenTextures(1, &grass_texture_id);
+	glBindTexture(GL_TEXTURE_2D, grass_texture_id);
+	glTexImage2D(
+		GL_TEXTURE_2D,
+		0,					//level
+		GL_RGBA,			//internal format
+		img_width,			//width
+		img_height,			//height
+		0,					//border
+		GL_RGBA,			//data format
+		GL_UNSIGNED_BYTE,	//data type
+		imgData);			//data
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	stbi_image_free(imgData);
+
+	imgData = stbi_load("terrain.png", &img_width, &img_height, &bpp, 4);
+	glGenTextures(1, &atlas_texture_id);
+	glBindTexture(GL_TEXTURE_2D, atlas_texture_id);
+	glTexImage2D(
+		GL_TEXTURE_2D,
+		0,					//level
+		GL_RGBA,			//internal format
+		img_width,			//width
+		img_height,			//height
+		0,					//border
+		GL_RGBA,			//data format
+		GL_UNSIGNED_BYTE,	//data type
+		imgData);			//data
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+	stbi_image_free(imgData);
 
 	glutIdleFunc(idle);
 	glutDisplayFunc(display);
@@ -157,6 +215,7 @@ int main(int argc, char* argv[])
 	glutPassiveMotionFunc(mousePassiveMotion);
 
 	glutWarpPointer(width / 2, height / 2);
+	glutSetCursor(GLUT_CURSOR_NONE);
 
 	glutMainLoop();
 
