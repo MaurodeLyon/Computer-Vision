@@ -59,6 +59,9 @@ void colorcube()
 	quad(0, 1, 5, 4);
 }
 
+bool depth = true;
+unsigned int rotation = 0;
+
 void display()
 {
 	glClearColor(0, 0, 0, 1);
@@ -66,19 +69,38 @@ void display()
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	int w = glutGet(GLUT_WINDOW_WIDTH);
-	int h = glutGet(GLUT_WINDOW_HEIGHT);
-	gluPerspective(60, w / h, 0.1, 100);
+	auto w = glutGet(GLUT_WINDOW_WIDTH);
+	auto h = glutGet(GLUT_WINDOW_HEIGHT);
 
+	if (depth)
+		gluPerspective(60, w / h, 0.1, 100);
+	else
+		glOrtho(-10, 10, -10, 10, -20, 20);
 	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-	gluLookAt
-		(
-			3, 3, 3,
-			0, 0, 0,
-			0, 0, 1
-			);
 
+	//rechter cube
+	glLoadIdentity();
+	gluLookAt(0, -10, -10, 0, 0, 0, 0, 0, 1);
+	glRotatef(rotation, 1, 0, 0);
+	glTranslatef(5, 0, 0);
+	colorcube();
+
+	//linker cube
+	glLoadIdentity();
+	gluLookAt(0, -10, -10, 0, 0, 0, 0, 0, 1);
+	glTranslatef(-5, 0, 0);
+	glRotatef(rotation, 0, 1, 0);
+	colorcube();
+	
+	//back cube
+	glLoadIdentity();
+	gluLookAt(0, -10, -10, 0, 0, 0, 0, 0, 1);
+	glTranslatef(0, 0, 5);
+	colorcube();
+
+	//middle cube
+	glLoadIdentity();
+	gluLookAt(0, -10, -10, 0, 0, 0, 0, 0, 1);
 	glRotatef(rotate_x, 1.0, 0.0, 0.0);
 	glRotatef(rotate_y, 0.0, 1.0, 0.0);
 	colorcube();
@@ -96,6 +118,11 @@ void onKeyboard(unsigned char key, int x, int y)
 	{
 		exit(0);
 	}
+	if (key == 32)
+	{
+		depth = !depth;
+	}
+
 	if (key == 119)
 	{
 		rotate_y += 5;
@@ -114,7 +141,8 @@ void onKeyboard(unsigned char key, int x, int y)
 
 void timer(int value)
 {
-	glutTimerFunc(1000, timer, 1000);
+	rotation++;
+	glutTimerFunc(25, timer, 1000);
 }
 
 int main(int argc, char* argv[]) {
