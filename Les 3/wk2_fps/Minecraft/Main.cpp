@@ -8,6 +8,9 @@
 
 #include "stb_image.h"
 #include <math.h>
+#include <algorithm>
+#include <iostream>
+#include <vector>
 
 
 struct Camera
@@ -24,16 +27,17 @@ float lastFrameTime = 0;
 int width, height;
 unsigned int grass_texture_id;
 unsigned int atlas_texture_id;
+typedef std::vector<std::vector<std::vector<int> > > world;
 
 void drawCube(int value)
 {
-	int i = value;
+	auto i = value;
 	i = i % 256;
-	float x1 = (i % 16) * 0.0625;
-	float y1 = (i * 0.0625) * 0.0625;
-	float x2 = x1 + 0.0625;
-	float y2 = y1 + 0.0625;
-	printf("i: %d\tx1: %f\tx2: %f\ty1: %f\ty2: %f\n",i, x1, x2, y1, y2);
+	auto x1 = float((i % 16) * 0.0625);
+	auto y1 = float((i * 0.0625) * 0.0625);
+	auto x2 = float(x1 + 0.0625);
+	auto y2 = float(y1 + 0.0625);
+	//printf("i: %d\tx1: %f\tx2: %f\ty1: %f\ty2: %f\n",i, x1, x2, y1, y2);
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D, atlas_texture_id);
 	glBegin(GL_QUADS);
@@ -141,7 +145,7 @@ void idle()
 	camera.posY -= camera.speedY * deltaTime;		//jump
 	if (camera.posY > -4)							//ground collision
 		camera.posY = -4;
-	camera.speedY -= 9.81 * deltaTime;				//gravity
+	camera.speedY -= float(9.81 * deltaTime);				//gravity
 
 	glutPostRedisplay();
 }
