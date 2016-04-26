@@ -13,8 +13,8 @@
 struct Camera
 {
 	float posX = 0;
-	float posY = 0;
-	float posZ = -4;
+	float posY = -4;
+	float posZ = 0;
 	float rotX = 0;
 	float rotY = 0;
 	float speedY = 0;
@@ -102,14 +102,17 @@ void display()
 	glTexCoord2f(0, 1); glVertex3f(-15, -1, 15);
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
-	for (int x = -10; x <= 10; x += 5)
+	for (auto x = -10; x <= 10; x += 2)
 	{
-		for (int y = -10; y <= 10; y += 5)
+		for (auto y = -10; y <= 10; y += 2)
 		{
-			glPushMatrix();
-			glTranslatef((float)x, 0.0f, (float)y);
-			drawCube(16);
-			glPopMatrix();
+			for (auto z = -10; z <= 10; z += 2)
+			{
+				glPushMatrix();
+				glTranslatef(float(x), float(z), float(y));
+				drawCube(16);
+				glPopMatrix();
+			}
 		}
 	}
 
@@ -133,11 +136,11 @@ void idle()
 	if (keys['d']) move(180, deltaTime*speed);
 	if (keys['w']) move(90, deltaTime*speed);
 	if (keys['s']) move(270, deltaTime*speed);
-	if (camera.posY == 0) if (keys[' '])  camera.speedY = 4;
+	if (camera.posY == -4) if (keys[' '])  camera.speedY = 4;
 
 	camera.posY -= camera.speedY * deltaTime;		//jump
-	if (camera.posY > 0)							//ground collision
-		camera.posY = 0;
+	if (camera.posY > -4)							//ground collision
+		camera.posY = -4;
 	camera.speedY -= 9.81 * deltaTime;				//gravity
 
 	glutPostRedisplay();
