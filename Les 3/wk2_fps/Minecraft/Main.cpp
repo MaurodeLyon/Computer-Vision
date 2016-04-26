@@ -25,51 +25,54 @@ int width, height;
 unsigned int grass_texture_id;
 unsigned int atlas_texture_id;
 
-void drawCube()
+void drawCube(int value)
 {
-	float x1 = (1 % 16) * (1 / 16);
-	float y1 = (1 / 16) * (1 / 16);
-	float x2 = x1 + (1 / 16);
-	float y2 = y1 + (1 / 16);
-
+	int i = value;
+	i = i % 256;
+	float x1 = (i % 16) * 0.0625;
+	float y1 = (i * 0.0625) * 0.0625;
+	float x2 = x1 + 0.0625;
+	float y2 = y1 + 0.0625;
+	printf("i: %d\tx1: %f\tx2: %f\ty1: %f\ty2: %f\n",i, x1, x2, y1, y2);
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D, grass_texture_id);
+	glBindTexture(GL_TEXTURE_2D, atlas_texture_id);
 	glBegin(GL_QUADS);
-	//glColor3f(1, 0, 0);
-	glTexCoord2f(0, 0); glVertex3f(-1, -1, -1);
-	glTexCoord2f(1, 0); glVertex3f(1, -1, -1);
-	glTexCoord2f(1, 1); glVertex3f(1, 1, -1);
-	glTexCoord2f(0, 1); glVertex3f(-1, 1, -1);
+	glColor3f(1, 1, 1);
+	//
+	glTexCoord2f(x1, y1); glVertex3f(-1, -1, -1);
+	glTexCoord2f(x2, y1); glVertex3f(1, -1, -1);
+	glTexCoord2f(x2, y2); glVertex3f(1, 1, -1);
+	glTexCoord2f(x1, y2); glVertex3f(-1, 1, -1);
 
-	//glColor3f(1, 1, 0);
-	glTexCoord2f(0, 0); glVertex3f(-1, -1, 1);
-	glTexCoord2f(1, 0); glVertex3f(1, -1, 1);
-	glTexCoord2f(1, 1); glVertex3f(1, 1, 1);
-	glTexCoord2f(0, 1); glVertex3f(-1, 1, 1);
+	glColor3f(1, 1, 1);
+	glTexCoord2f(x1, y1); glVertex3f(-1, -1, 1);
+	glTexCoord2f(x2, y1); glVertex3f(1, -1, 1);
+	glTexCoord2f(x2, y2); glVertex3f(1, 1, 1);
+	glTexCoord2f(x1, y2); glVertex3f(-1, 1, 1);
 
 	//glColor3f(0, 0, 1);
-	glTexCoord2f(0, 0); glVertex3f(-1, -1, -1);
-	glTexCoord2f(1, 0); glVertex3f(-1, 1, -1);
-	glTexCoord2f(1, 1); glVertex3f(-1, 1, 1);
-	glTexCoord2f(0, 1); glVertex3f(-1, -1, 1);
+	glTexCoord2f(x1, y1); glVertex3f(-1, -1, -1);
+	glTexCoord2f(x2, y1); glVertex3f(-1, 1, -1);
+	glTexCoord2f(x2, y2); glVertex3f(-1, 1, 1);
+	glTexCoord2f(x1, y2); glVertex3f(-1, -1, 1);
 
 	//glColor3f(1, -1, 1);
-	glTexCoord2f(0, 0); glVertex3f(1, -1, -1);
-	glTexCoord2f(1, 0); glVertex3f(1, 1, -1);
-	glTexCoord2f(1, 1); glVertex3f(1, 1, 1);
-	glTexCoord2f(0, 1); glVertex3f(1, -1, 1);
+	glTexCoord2f(x1, y1); glVertex3f(1, -1, -1);
+	glTexCoord2f(x2, y1); glVertex3f(1, 1, -1);
+	glTexCoord2f(x2, y2); glVertex3f(1, 1, 1);
+	glTexCoord2f(x1, y2); glVertex3f(1, -1, 1);
 
 	//glColor3f(0, 1, 0);
-	glTexCoord2f(0, 0); glVertex3f(-1, -1, -1);
-	glTexCoord2f(1, 0); glVertex3f(1, -1, -1);
-	glTexCoord2f(1, 1); glVertex3f(1, -1, 1);
-	glTexCoord2f(0, 1); glVertex3f(-1, -1, 1);
+	glTexCoord2f(x1, y1); glVertex3f(-1, -1, -1);
+	glTexCoord2f(x2, y1); glVertex3f(1, -1, -1);
+	glTexCoord2f(x2, y2); glVertex3f(1, -1, 1);
+	glTexCoord2f(x1, y2); glVertex3f(-1, -1, 1);
 
 	//glColor3f(1, 1, 0);
-	glTexCoord2f(0, 0); glVertex3f(-1, 1, -1);
-	glTexCoord2f(1, 0); glVertex3f(1, 1, -1);
-	glTexCoord2f(1, 1); glVertex3f(1, 1, 1);
-	glTexCoord2f(0, 1); glVertex3f(-1, 1, 1);
+	glTexCoord2f(x1, y1); glVertex3f(-1, 1, -1);
+	glTexCoord2f(x2, y1); glVertex3f(1, 1, -1);
+	glTexCoord2f(x2, y2); glVertex3f(1, 1, 1);
+	glTexCoord2f(x1, y2); glVertex3f(-1, 1, 1);
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
 }
@@ -105,7 +108,7 @@ void display()
 		{
 			glPushMatrix();
 			glTranslatef((float)x, 0.0f, (float)y);
-			drawCube();
+			drawCube(16);
 			glPopMatrix();
 		}
 	}
