@@ -17,8 +17,9 @@ void display(void)
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	gluLookAt(0, models[currentModel].first*1.1, models[currentModel].first * 2, 0, 0, 0, 0, 1, 0);
-
+	gluLookAt(0, models[currentModel].first*1.1, models[currentModel].first * 2,
+			  0, 0, 0, 
+			  0, 1, 0);
 
 	glRotatef(rotation, 0, 1, 0);
 	models[currentModel].second->draw();
@@ -70,10 +71,10 @@ void Keyboard(unsigned char key, int x, int y)
 	case 27:             // ESCAPE key
 		exit(0);
 		break;
-	case '[':
+	case 'a':
 		currentModel = (currentModel + models.size() - 1) % models.size();
 		break;
-	case ']':
+	case 'd':
 		currentModel = (currentModel + 1) % models.size();
 		break;
 	}
