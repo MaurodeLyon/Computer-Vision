@@ -82,9 +82,11 @@
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="ObjModel.cpp" />
+    <ClCompile Include="ObjTexture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ObjModel.h" />
+    <ClInclude Include="ObjTexture.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
