@@ -69,6 +69,7 @@ void display()
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
+
 	auto w = glutGet(GLUT_WINDOW_WIDTH);
 	auto h = glutGet(GLUT_WINDOW_HEIGHT);
 
