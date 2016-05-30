@@ -40,6 +40,9 @@
     <Filter Include="Header Files\RenderEngine">
       <UniqueIdentifier>{f485bca4-3725-4be9-8112-53833a5592ff}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\GameEngine">
+      <UniqueIdentifier>{117f12c4-b078-44c2-b67f-760f145fc029}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -60,6 +63,9 @@
     <ClInclude Include="Window.h">
       <Filter>Header Files\RenderEngine</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -76,6 +82,9 @@
     </ClCompile>
     <ClCompile Include="Window.cpp">
       <Filter>Source Files\RenderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngine.cpp">
+      <Filter>Source Files\GameEngine</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

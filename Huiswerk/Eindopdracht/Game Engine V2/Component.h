@@ -9,5 +9,9 @@ public:
 	{
 		std::cout << "update: component" << std::endl;
 	}
+	virtual void render()
+	{
+		std::cout << "render: component" << std::endl;
+	}
 };
 

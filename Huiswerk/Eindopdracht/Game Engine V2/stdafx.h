@@ -26,5 +26,7 @@
 //Render Engine
 #include "Window.h"
 
+//Game Engine
+#include "GameEngine.h"
 
 // TODO: reference additional headers your program requires here

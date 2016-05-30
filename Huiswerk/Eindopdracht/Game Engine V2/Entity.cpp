@@ -12,3 +12,11 @@ void Entity::update()
 		c->update(*this);
 	}
 }
+
+void Entity::render()
+{
+	for each(Component* c in components)
+	{
+		c->render();
+	}
+}
