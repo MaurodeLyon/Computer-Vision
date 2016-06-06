@@ -1,4 +1,5 @@
 #define STB_IMAGE_IMPLEMENTATION
+#define STB_PERLIN_IMPLEMENTATION
 #define _USE_MATH_DEFINES
 
 #include <cstdio>
@@ -7,6 +8,7 @@
 #include <math.h>
 
 #include "stb_image.h"
+#include "stb_perlin.h"
 #include <math.h>
 #include <algorithm>
 #include <iostream>
@@ -22,12 +24,17 @@ struct Camera
 	float rotY = 0;
 	float speedY = 0;
 } camera;
+
+const int WIDTH = 100;
+const int HEIGHT = 32;
+const int DEPTH = 100;
+
+int *** world = new int**[WIDTH];
 bool keys[255];
 float lastFrameTime = 0;
 int width, height;
 unsigned int grass_texture_id;
 unsigned int atlas_texture_id;
-typedef std::vector<std::vector<std::vector<int> > > world;
 
 void drawCube(int value)
 {
@@ -48,7 +55,7 @@ void drawCube(int value)
 	glTexCoord2f(x2, y2); glVertex3f(1, 1, -1);
 	glTexCoord2f(x1, y2); glVertex3f(-1, 1, -1);
 
-	glColor3f(1, 1, 1);
+	//glColor3f(1, 1, 1);
 	glTexCoord2f(x1, y1); glVertex3f(-1, -1, 1);
 	glTexCoord2f(x2, y1); glVertex3f(1, -1, 1);
 	glTexCoord2f(x2, y2); glVertex3f(1, 1, 1);
@@ -88,7 +95,7 @@ void display()
 
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(90.0f, (float)width / height, 0.1, 30);
+	gluPerspective(90.0f, (float)width / height, 0.1, 300);
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
@@ -106,15 +113,24 @@ void display()
 	glTexCoord2f(0, 1); glVertex3f(-15, -1, 15);
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
-	for (auto x = -10; x <= 10; x += 2)
+	for (auto x = 0; x < 100; x += 1)
 	{
-		for (auto y = -10; y <= 10; y += 2)
+		for (auto y = 0; y < 32; y += 1)
 		{
-			for (auto z = -10; z <= 10; z += 2)
+			for (auto z = 0; z < 100; z++)
 			{
 				glPushMatrix();
-				glTranslatef(float(x), float(z), float(y));
-				drawCube(16);
+				glTranslatef(float(x + x), float(y + y + stb_perlin_noise3(x, y, z, 0, 0, 0)), float(z + z));
+				if (world[x][y][z] == -1);
+				else if (world[x][y][z] == 1)
+				{
+					drawCube(0);
+				}
+				else if (world[x][y][z] == 2)
+				{
+					drawCube(17);
+				}
+
 				glPopMatrix();
 			}
 		}
@@ -140,13 +156,15 @@ void idle()
 	if (keys['d']) move(180, deltaTime*speed);
 	if (keys['w']) move(90, deltaTime*speed);
 	if (keys['s']) move(270, deltaTime*speed);
-	if (camera.posY == -4) if (keys[' '])  camera.speedY = 4;
+	//if (camera.posY == -4)
+	if (keys[' '])  camera.posY -= 1;
+	if (keys['x'])  camera.posY += 1;
 
-	camera.posY -= camera.speedY * deltaTime;		//jump
+	/*camera.posY -= camera.speedY * deltaTime;		//jump
 	if (camera.posY > -4)							//ground collision
 		camera.posY = -4;
 	camera.speedY -= float(9.81 * deltaTime);				//gravity
-
+	*/
 	glutPostRedisplay();
 }
 
@@ -183,6 +201,25 @@ int main(int argc, char* argv[])
 
 	memset(keys, 0, sizeof(keys));
 	glEnable(GL_DEPTH_TEST);
+
+
+	for (int x = 0; x < WIDTH; x++)
+	{
+		world[x] = new int*[HEIGHT];
+		for (int y = 0; y < HEIGHT; y++)
+		{
+			world[x][y] = new int[DEPTH];
+			for (int z = 0; z < DEPTH; z++)
+			{
+				if (y == 16)
+					world[x][y][z] = 1;
+				else if (y < 16)
+					world[x][y][z] = 2;
+				else
+					world[x][y][z] = -1;
+			}
+		}
+	}
 
 	int img_width, img_height, bpp;
 	unsigned char* imgData = stbi_load("grass_grass_0099_02_preview.jpg", &img_width, &img_height, &bpp, 4);
