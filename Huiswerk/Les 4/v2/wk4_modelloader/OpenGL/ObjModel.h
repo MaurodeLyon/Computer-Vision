@@ -44,7 +44,6 @@ public:
 };
 
 
-
 class ObjModel
 {
 private:
@@ -61,13 +60,30 @@ private:
 	public:
 		list<Vertex> vertices;
 	};
+
+	class Texture
+	{
+	public:
+		Texture(string &fileName);
+		~Texture() {};
+		void bind()
+		{
+			glBindTexture(GL_TEXTURE_2D, texture);
+		};
+	private:
+		GLuint texture;
+		int width, height;
+	};
+
 	class MaterialInfo
 	{
 	public:
 		MaterialInfo();
 		std::string name;
 		bool hasTexture;
+		Texture * texture;
 	};
+
 	class S_Vertex
 	{
 	public:

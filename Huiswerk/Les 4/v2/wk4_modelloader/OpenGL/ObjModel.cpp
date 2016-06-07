@@ -3,6 +3,8 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#define STB_IMAGE_IMPLEMENTATION
+#include "stb_image.h"
 
 std::string replace(std::string str, std::string toReplace, std::string replacement)
 {
@@ -170,15 +172,13 @@ void ObjModel::draw()
 	{
 		//zet het materiaal / texture van deze groep
 		ObjGroup gr = *group;
-		/*if (gr.materialIndex != -1)
-		{
 
-			if (materials[gr.materialIndex]->hasTexture)
-			{
-				glEnable(GL_TEXTURE_2D);
-				materials[gr.materialIndex]->texture->bind();
-			}
-		}*/
+		if (gr.materialIndex != -1 && materials[gr.materialIndex]->hasTexture)
+		{
+			glEnable(GL_TEXTURE_2D);
+			materials[gr.materialIndex]->texture->bind();
+		}
+
 		glPushMatrix();
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glEnableClientState(GL_NORMAL_ARRAY);
@@ -245,7 +245,7 @@ void ObjModel::loadMaterialFile(std::string fileName, std::string dirName)
 		else if (params[0] == "map_kd")
 		{
 			currentMaterial->hasTexture = true;
-			//			currentMaterial->texture = new Texture(dirName + "/" + params[1]);
+			currentMaterial->texture = new Texture(dirName + "/" + params[1]);
 		}
 		else
 			std::cout << "Didn't parse " << params[0] << " in material file" << std::endl;
@@ -286,6 +286,22 @@ ObjModel::MaterialInfo::MaterialInfo()
 	hasTexture = false;
 }
 
+ObjModel::Texture::Texture(string& fileName)
+{
+	glGenTextures(1, &texture);
+	glBindTexture(GL_TEXTURE_2D, texture);
+	stbi_set_flip_vertically_on_load(true);
+
+	int textureWidth, textureHeight, textureBPP;
+	char* textureData = (char*)stbi_load(fileName.c_str(), &textureWidth, &textureHeight, &textureBPP, 4);
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, textureWidth, textureHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, (unsigned char*)textureData);
+	stbi_image_free(textureData);
+
+	width = textureWidth;
+	height = textureHeight;
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+}
 
 Vec3f::Vec3f(float x, float y, float z)
 {
