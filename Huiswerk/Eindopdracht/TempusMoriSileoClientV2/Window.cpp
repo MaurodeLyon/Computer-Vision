@@ -113,13 +113,15 @@ void Window::passiveMotion(int x, int y)
 int keyPressed;
 int x;
 int y;
+int z;
 void Window::keyboard(unsigned char key, int, int)
 {
 	keyPressed = key;
 	if (key == 'w') y += 5;
 	if (key == 'a') x -= 5;
 	if (key == 's') y -= 5;
-	if (key == 'd') x += 5;
+	if (key == 'r') z += 5;
+	if (key == 'f') z -= 5;
 	if (key == 27) exit(0);
 }
 

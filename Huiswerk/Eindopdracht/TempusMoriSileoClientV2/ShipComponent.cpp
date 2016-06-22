@@ -3,12 +3,14 @@
 
 extern int x;
 extern int y;
+extern int z;
 extern std::vector<pair<string, ObjModel*>> objectLibrary;
 
 void ShipComponent::update(Entity& entity)
 {
 	entity.x = x;
 	entity.y = y;
+	entity.z = z;
 	if (health < 0) entity.alive = false;
 }
 
@@ -18,9 +20,9 @@ void ShipComponent::render(Entity& entity)
 	{
 		auto * model = objectLibrary[2].second;
 
-		float orbx = (cos((360 - (360 / health * i)) * PI / 180.0) * 25);
+		float orbx = (cos((360 - (360 / health * i)) * PI / 180.0) * 50);
 		float orby = 0;
-		float orbz = (sin((360 - (360 / health * i)) * PI / 180.0) * 25);
+		float orbz = (sin((360 - (360 / health * i)) * PI / 180.0) * 50);
 
 		glPushMatrix();
 		glTranslatef(entity.x, entity.y, entity.z);
