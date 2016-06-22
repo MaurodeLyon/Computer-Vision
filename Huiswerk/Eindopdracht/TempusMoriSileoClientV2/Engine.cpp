@@ -18,7 +18,7 @@ void Engine::init_world()
 	auto * ship = new Entity();
 	ship->addComponent(new ObjModelComponent(objectLibrary[1].second));
 	ship->addComponent(new ShipComponent());
-	ship->addComponent(new CollisionComponent(5));
+	ship->addComponent(new CollisionComponent(20));
 	entities.push_back(ship);
 	
 	auto * spawner = new Entity(0,0,-250);

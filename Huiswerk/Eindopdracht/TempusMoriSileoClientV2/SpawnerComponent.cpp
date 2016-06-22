@@ -11,7 +11,7 @@ void SpawnerComponent::update(Entity& entity)
 		Entity * astroid = new Entity((rand() % 500) - 250, (rand() % 500) - 250, entity.z);
 		astroid->addComponent(new ObjModelComponent(objectLibrary[((rand() % 5) + 4)].second));
 		astroid->addComponent(new AstroidComponent((rand() % 4) + 1));
-		astroid->addComponent(new CollisionComponent(5));
+		astroid->addComponent(new CollisionComponent(20));
 		entitiesToAdd.push_back(astroid);
 		timer = rand() % 10;
 	}
