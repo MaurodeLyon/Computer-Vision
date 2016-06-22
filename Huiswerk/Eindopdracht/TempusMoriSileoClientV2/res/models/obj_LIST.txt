@@ -7,3 +7,5 @@ asteroid2
 asteroid11
 asteroid17
 asteroid21
+defiant
+Heart

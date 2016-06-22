@@ -55,10 +55,12 @@ Window::Window()
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_ALPHA_TEST);
 	glAlphaFunc(GL_GREATER, 0.01f);
-	//glEnable(GL_LIGHTING);
+	glEnable(GL_AMBIENT);
+	glEnable(GL_COLOR_MATERIAL);
+	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
-	glEnable(GL_LIGHT1);
-	glEnable(GL_LIGHT2);
+	//glEnable(GL_LIGHT1);
+	//glEnable(GL_LIGHT2);
 
 	//glutTimerFunc(50, update, 0);
 	glutIdleFunc(idle);
@@ -127,7 +129,7 @@ void Window::keyboard(unsigned char key, int, int)
 
 void Window::display()
 {
-	glClearColor(0, 0, 0, 1);
+	glClearColor(1, 1, 1, 1);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();

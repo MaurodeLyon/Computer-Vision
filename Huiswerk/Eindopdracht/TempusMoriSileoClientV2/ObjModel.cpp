@@ -239,6 +239,7 @@ void ObjModel::draw(Entity &entity, float scale, float rotation)
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
 		glPopMatrix();
 	}
+	
 }
 void ObjModel::draw(float x, float y, float z, float scale, float rotation)
 {
