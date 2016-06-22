@@ -3,11 +3,7 @@
 
 
 int lastFrameTime;
-extern float rightIndexX, rightIndexZ;
-extern float rightThumbX, rightThumbZ;
-
-extern float leftIndexX, leftIndexZ;
-extern float leftThumbX, leftThumbZ;
+extern Frame frame;
 
 Screen::Screen()
 {
@@ -72,15 +68,7 @@ void Screen::display()
 	glEnd();
 	glPopMatrix();
 
-	glPushMatrix();
-	glBegin(GL_QUADS);
-	glColor3f(1, 0, 0); // quad is red.
-	glVertex3f(rightIndexX, 0, rightIndexZ);
-	glVertex3f(leftIndexX, 0, leftIndexZ);
-	glVertex3f(leftThumbX, 0, leftThumbZ);
-	glVertex3f(rightThumbX, 0, rightThumbZ);
-	glEnd();
-	glPopMatrix();
+	
 
 
 

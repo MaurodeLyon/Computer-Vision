@@ -1,0 +1,219 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Source Files\RenderEngine">
+      <UniqueIdentifier>{fd5d2884-85de-4620-bba2-2b402ea7e12c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameEngine">
+      <UniqueIdentifier>{985c2f86-f633-43b7-9a10-0af16157113a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EntityEngine">
+      <UniqueIdentifier>{a4132754-bc59-42a0-8240-9f1595f8c2f1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EntityEngine\Components">
+      <UniqueIdentifier>{b10c1688-2e67-409f-8030-c3c7996573d8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EntityEngine">
+      <UniqueIdentifier>{54615918-bd9b-4a0e-a65b-584aa1ad6443}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\GameEngine">
+      <UniqueIdentifier>{2c5d844a-176d-49b1-b71f-675ce2505a05}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RenderEngine">
+      <UniqueIdentifier>{030377ab-e5aa-4966-8098-54f4e85eb54d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\InputEngine">
+      <UniqueIdentifier>{6ae94cab-eec3-4ed3-80ce-bc8963778ddb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\InputEngine">
+      <UniqueIdentifier>{9dd7c03b-70a0-4175-b9b3-b3d99bb2f290}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\RenderEngine\Object">
+      <UniqueIdentifier>{33e72b55-6600-47f5-8d4b-d8b8075cea07}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\RenderEngine\Object">
+      <UniqueIdentifier>{91e05c12-56fd-4857-ab55-6e38ef5a29de}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EntityEngine\Components\SpellComponents">
+      <UniqueIdentifier>{e6dddf41-560b-4609-85bc-50d65284fd23}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EntityEngine\Components\SpawnerComponents">
+      <UniqueIdentifier>{2cd15ba1-10d4-49b9-8b91-d945e6249cc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\EntityEngine\Components\InterfaceComponents">
+      <UniqueIdentifier>{61195893-81c7-424c-9507-42e14a02513e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EntityEngine\Components">
+      <UniqueIdentifier>{6e1c9115-5fe6-4d9d-8473-d6f4e6ac4e8e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\EntityEngine\Components\Interface">
+      <UniqueIdentifier>{7c6d96ec-af16-42e2-8ea5-97249e7c28f4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="ReadMe.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="stdafx.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="targetver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files\EntityEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Window.h">
+      <Filter>Header Files\RenderEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="LeapController.h">
+      <Filter>Header Files\InputEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjLibrary.h">
+      <Filter>Header Files\RenderEngine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjModel.h">
+      <Filter>Header Files\RenderEngine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjTexture.h">
+      <Filter>Header Files\RenderEngine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="S_Vertex.h">
+      <Filter>Header Files\RenderEngine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterfaceComponent.h">
+      <Filter>Header Files\EntityEngine\Components\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuComponent.h">
+      <Filter>Header Files\EntityEngine\Components\Interface</Filter>
+    </ClInclude>
+    <ClInclude Include="SpellMoveComponent.h">
+      <Filter>Header Files\EntityEngine\SpellComponents</Filter>
+    </ClInclude>
+    <ClInclude Include="Audio.h">
+      <Filter>Header Files\GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Header Files\EntityEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="stb_image.h">
+      <Filter>Header Files\RenderEngine\Object</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="stdafx.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\EntityEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Component.cpp">
+      <Filter>Source Files\EntityEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Window.cpp">
+      <Filter>Source Files\RenderEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="LeapController.cpp">
+      <Filter>Source Files\InputEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjLibrary.cpp">
+      <Filter>Source Files\RenderEngine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjModel.cpp">
+      <Filter>Source Files\RenderEngine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjTexture.cpp">
+      <Filter>Source Files\RenderEngine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="S_Vertex.cpp">
+      <Filter>Source Files\RenderEngine\Object</Filter>
+    </ClCompile>
+    <ClCompile Include="SpellMoveComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="SpellAreaComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components\AIComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterfaceComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components\InterfaceComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="MenuComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components\InterfaceComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterfaceComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SpellAreaComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="SpellDamageComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="SpellStaticComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Audio.cpp">
+      <Filter>Source Files\GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitSlowSpeedComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="TrainMoveComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitBuffDamageComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="SpellBuffDamageComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="SpellDebuffSpeedComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="SpellResurrectionComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="SpellDotComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="UnitDotComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components\GameObjects</Filter>
+    </ClCompile>
+    <ClCompile Include="SpellBuffComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Spawner.cpp">
+      <Filter>Source Files\EntityEngine\Components\SpawnerComponents</Filter>
+    </ClCompile>
+    <ClCompile Include="Dodger.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
