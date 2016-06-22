@@ -7,7 +7,7 @@ public:
 	ObjModelComponent(ObjModel* objModel, float rotation, float scale) : objModel(objModel), scale(scale), rotation(rotation) {}
 	~ObjModelComponent() {};
 
-	virtual void render(Entity& entity);
+	void render(Entity& entity) override;
 	void setRotation(float rotation) { this->rotation = rotation; }
 	void setScale(float scale) { this->scale = scale; }
 private:

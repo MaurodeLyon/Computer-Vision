@@ -8,7 +8,7 @@ public:
 	~Window(){};
 private:
 	bool keys[255];
-	static void setPlayerView(int);
+
 	static void idle();
 	static void passiveMotion(int x, int y);
 	static void keyboard(unsigned char key, int, int);

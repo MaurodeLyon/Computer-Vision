@@ -1,5 +1,5 @@
 #pragma once
-
+using namespace std;
 class UserInterfaceComponent : public Component
 {
 public:
@@ -9,7 +9,7 @@ public:
 	virtual void render(Entity& entity);
 
 	void glutBitmapString(std::string str, int x, int y);
-	void loadTextures(string pictureName, bool unitPicture);
+	void loadTextures(std::string pictureName, bool unitPicture);
 	void nextUnit();
 	void nextSpell();
 	void undeadTextures();
@@ -30,7 +30,7 @@ private:
 	int spell;
 
 	GLuint unitSelect;
-	vector<pair<string, GLuint>> unitPictures;
+	std::vector<std::pair<string, GLuint>> unitPictures;
 	vector<pair<string, GLuint>> spellPictures;
 };
 

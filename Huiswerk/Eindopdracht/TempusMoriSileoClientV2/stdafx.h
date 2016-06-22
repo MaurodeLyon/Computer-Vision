@@ -10,50 +10,38 @@
 #include <stdio.h>
 #include <tchar.h>
 
+#include <algorithm>
 #include <vector>
 #include <string>
 #include <iostream>
 #include <fstream>
 #include <chrono>
 #include <ctime>
+#include <time.h>
 #include <list>
+#include <mutex>
 
 #include "include/Leap/Leap.h"
 #include "include/GL/freeglut.h"
-#include "irrKlang/irrKlang.h"
+#include "include/irrKlang/irrKlang.h"
 
 //Entity Engine
 #include "Component.h"
 #include "Entity.h"
-#include "CollisionComponent.h"
-#include "AttackComponent.h"
+
+#include "UserInterfaceComponent.h"
+
 #include "ObjModelComponent.h"
-#include "MenuComponent.h"
-#include "UnitComponent.h"
-#include "NPCComponent.h"
-
-#include "PlayerComponent.h"
-
-#include "SpellAreaComponent.h"
-#include "SpellMoveComponent.h"
-#include "Spawner"
-
 #include "AudioComponent.h"
-#include "CursorComponent.h"
 
+
+#include "SpawnerComponent.h"
+#include "ShipComponent.h"
+#include "AstroidComponent.h"
 
 //Audio Engine
-#include "UserInterfaceComponent.h"
-#include "UnitComponent.h"
+#include "Audio.h"
 #include "stb_image.h"
-
-//Network Engine
-#include "Client.h"
-#include "packet.h"
-#include "MobPacket.h"
-#include "Loginpacket.h"
-#include "SpellPacket.h"
-
 
 //Game Engine
 #include "Engine.h"

@@ -46,20 +46,8 @@
     <Filter Include="Header Files\RenderEngine\Object">
       <UniqueIdentifier>{91e05c12-56fd-4857-ab55-6e38ef5a29de}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\EntityEngine\Components\SpellComponents">
-      <UniqueIdentifier>{e6dddf41-560b-4609-85bc-50d65284fd23}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\EntityEngine\Components\SpawnerComponents">
-      <UniqueIdentifier>{2cd15ba1-10d4-49b9-8b91-d945e6249cc6}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\EntityEngine\Components\InterfaceComponents">
-      <UniqueIdentifier>{61195893-81c7-424c-9507-42e14a02513e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\EntityEngine\Components">
       <UniqueIdentifier>{6e1c9115-5fe6-4d9d-8473-d6f4e6ac4e8e}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Header Files\EntityEngine\Components\Interface">
-      <UniqueIdentifier>{7c6d96ec-af16-42e2-8ea5-97249e7c28f4}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -96,15 +84,6 @@
     <ClInclude Include="S_Vertex.h">
       <Filter>Header Files\RenderEngine\Object</Filter>
     </ClInclude>
-    <ClInclude Include="UserInterfaceComponent.h">
-      <Filter>Header Files\EntityEngine\Components\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="MenuComponent.h">
-      <Filter>Header Files\EntityEngine\Components\Interface</Filter>
-    </ClInclude>
-    <ClInclude Include="SpellMoveComponent.h">
-      <Filter>Header Files\EntityEngine\SpellComponents</Filter>
-    </ClInclude>
     <ClInclude Include="Audio.h">
       <Filter>Header Files\GameEngine</Filter>
     </ClInclude>
@@ -113,6 +92,24 @@
     </ClInclude>
     <ClInclude Include="stb_image.h">
       <Filter>Header Files\RenderEngine\Object</Filter>
+    </ClInclude>
+    <ClInclude Include="UserInterfaceComponent.h">
+      <Filter>Header Files\EntityEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjModelComponent.h">
+      <Filter>Header Files\EntityEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AudioComponent.h">
+      <Filter>Header Files\EntityEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="ShipComponent.h">
+      <Filter>Header Files\EntityEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="AstroidComponent.h">
+      <Filter>Header Files\EntityEngine\Components</Filter>
+    </ClInclude>
+    <ClInclude Include="SpawnerComponent.h">
+      <Filter>Header Files\EntityEngine\Components</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -146,74 +143,38 @@
     <ClCompile Include="S_Vertex.cpp">
       <Filter>Source Files\RenderEngine\Object</Filter>
     </ClCompile>
-    <ClCompile Include="SpellMoveComponent.cpp">
-      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="SpellAreaComponent.cpp">
-      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="UnitComponent.cpp">
-      <Filter>Source Files\EntityEngine\Components\AIComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="UserInterfaceComponent.cpp">
-      <Filter>Source Files\EntityEngine\Components\InterfaceComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="MenuComponent.cpp">
-      <Filter>Source Files\EntityEngine\Components\InterfaceComponents</Filter>
-    </ClCompile>
     <ClCompile Include="UserInterfaceComponent.cpp">
       <Filter>Source Files\EntityEngine\Components</Filter>
     </ClCompile>
     <ClCompile Include="SpellAreaComponent.cpp">
       <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
     </ClCompile>
-    <ClCompile Include="SpellDamageComponent.cpp">
-      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="SpellStaticComponent.cpp">
-      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
-    </ClCompile>
     <ClCompile Include="Audio.cpp">
       <Filter>Source Files\GameEngine</Filter>
     </ClCompile>
     <ClCompile Include="Audio.cpp">
       <Filter>Source Files\GameEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="UnitSlowSpeedComponent.cpp">
-      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="TrainMoveComponent.cpp">
-      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="UnitBuffDamageComponent.cpp">
-      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="SpellBuffDamageComponent.cpp">
-      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="SpellDebuffSpeedComponent.cpp">
-      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="SpellResurrectionComponent.cpp">
-      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="SpellDotComponent.cpp">
-      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="UnitDotComponent.cpp">
-      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="AudioComponent.cpp">
-      <Filter>Source Files\EntityEngine\Components\GameObjects</Filter>
-    </ClCompile>
-    <ClCompile Include="SpellBuffComponent.cpp">
-      <Filter>Source Files\EntityEngine\Components\SpellComponents</Filter>
-    </ClCompile>
-    <ClCompile Include="Spawner.cpp">
-      <Filter>Source Files\EntityEngine\Components\SpawnerComponents</Filter>
     </ClCompile>
     <ClCompile Include="Dodger.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="UserInterfaceComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjModelComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AudioComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="ShipComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="AstroidComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components</Filter>
+    </ClCompile>
+    <ClCompile Include="SpawnerComponent.cpp">
+      <Filter>Source Files\EntityEngine\Components</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

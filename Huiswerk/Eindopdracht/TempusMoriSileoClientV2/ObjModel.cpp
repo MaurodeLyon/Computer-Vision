@@ -1,9 +1,5 @@
 #include "stdafx.h"
 #include "ObjModel.h"
-#include <fstream>
-#include <iostream>
-#include <vector>
-#include <algorithm>
 
 std::string replace(std::string str, std::string toReplace, std::string replacement)
 {
