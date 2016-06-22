@@ -116,6 +116,7 @@ int keyPressed;
 int x;
 int y;
 int z;
+extern Audio audio;
 void Window::keyboard(unsigned char key, int, int)
 {
 	keyPressed = key;
@@ -123,7 +124,15 @@ void Window::keyboard(unsigned char key, int, int)
 	if (key == 'a') x -= 5;
 	if (key == 's') y -= 5;
 	if (key == 'r') z += 5;
-	if (key == 'f') z -= 5;
+	if (key == ' ')
+	{
+		audio.play("res/music/collision.mp3",false,1);
+		auto * ship = new Entity();
+		ship->addComponent(new ObjModelComponent(objectLibrary[1].second));
+		ship->addComponent(new ShipComponent());
+		ship->addComponent(new CollisionComponent(20));
+		entitiesToAdd.push_back(ship);
+	}
 	if (key == 27) exit(0);
 }
 
@@ -153,18 +162,18 @@ void Window::display()
 	for (vector<Entity*>::iterator it = entities.begin(); it != entities.end();)
 	{
 		Entity* e = *it;
-		if (e->alive)
-		{
+		//if (e->alive)
+		//{
 			glPushMatrix();
 			e->render();
 			glPopMatrix();
 			++it;
-		}
+		//}
 	}
 	entitiesLock.unlock();
 
 
-	glPushMatrix();
+	/*glPushMatrix();
 	glBegin(GL_LINES);
 	glColor3f(1, 0, 0); // X axis is red.
 	glVertex3f(0, 0, 0);
@@ -176,7 +185,7 @@ void Window::display()
 	glVertex3f(0, 0, 0);
 	glVertex3f(0, 0, 10000);
 	glEnd();
-	glPopMatrix();
+	glPopMatrix();*/
 
 	glutSwapBuffers();
 }

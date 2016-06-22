@@ -2,6 +2,7 @@
 #include "CollisionComponent.h"
 
 extern std::vector<Entity*> entities;
+extern Audio audio;
 
 void CollisionComponent::update(Entity& entity)
 {
@@ -31,6 +32,7 @@ void CollisionComponent::update(Entity& entity)
 											if (collision)
 											{
 												//collision with astroid
+												audio.play("res/music/collision.mp3", false, 1);
 												ship->setHealth(ship->getHealth() - 1);
 												other_entity->alive = false;
 											}

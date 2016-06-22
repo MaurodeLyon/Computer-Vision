@@ -3,34 +3,13 @@ using namespace std;
 class UserInterfaceComponent : public Component
 {
 public:
-	UserInterfaceComponent();
+	int DeathCount;
+
+	UserInterfaceComponent() : DeathCount(0) {};
 	~UserInterfaceComponent() {};
 
 	virtual void render(Entity& entity);
 
 	void glutBitmapString(std::string str, int x, int y);
-	void loadTextures(std::string pictureName, bool unitPicture);
-	void nextUnit();
-	void nextSpell();
-	void undeadTextures();
-	void wizardsTextures();
-	void humanTextures();
-	void setHealth(int health) { this->health = health; }
-	void setEnemyHealth(int enemyHealth) { this->enemyHealth = enemyHealth; }
-
-	void setEnergy(int energy) { this->energy = energy; }
-	void setMaxEnergy(int maxEnergy) { this->maxEnergy = maxEnergy; }
-
-	void setMaxEnemyHealth(double maxEnemyHealth) { this->maxEnemyHealth = maxEnemyHealth; };
-	void setMaxHealth(double maxHealth) { this->maxHealth = maxHealth; };
-private:
-	double maxHealth, maxEnemyHealth, maxEnergy;
-	int health, enemyHealth, energy;
-	int unit;
-	int spell;
-
-	GLuint unitSelect;
-	std::vector<std::pair<string, GLuint>> unitPictures;
-	vector<pair<string, GLuint>> spellPictures;
 };
 
