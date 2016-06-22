@@ -4,13 +4,13 @@
 std::string replace(std::string str, std::string toReplace, std::string replacement)
 {
 	size_t index = 0;
-	while (true) 
+	while (true)
 	{
-		 index = str.find(toReplace, index);
-		 if (index == std::string::npos) 
-			 break;
-		 str.replace(index, toReplace.length(), replacement);
-		 ++index;
+		index = str.find(toReplace, index);
+		if (index == std::string::npos)
+			break;
+		str.replace(index, toReplace.length(), replacement);
+		++index;
 	}
 	return str;
 }
@@ -19,13 +19,13 @@ std::vector<std::string> split(std::string str, std::string sep)
 {
 	std::vector<std::string> ret;
 	size_t index;
-	while(true)
+	while (true)
 	{
 		index = str.find(sep);
-		if(index == std::string::npos)
+		if (index == std::string::npos)
 			break;
 		ret.push_back(str.substr(0, index));
-		str = str.substr(index+1);
+		str = str.substr(index + 1);
 	}
 	ret.push_back(str);
 	return ret;
@@ -43,11 +43,11 @@ inline std::string toLower(std::string data)
 ObjModel::ObjModel(std::string fileName)
 {
 	std::string dirName = fileName;
-	if(dirName.rfind("/") != std::string::npos)
+	if (dirName.rfind("/") != std::string::npos)
 		dirName = dirName.substr(0, dirName.rfind("/"));
-	if(dirName.rfind("\\") != std::string::npos)
+	if (dirName.rfind("\\") != std::string::npos)
 		dirName = dirName.substr(0, dirName.rfind("\\"));
-	if(fileName == dirName)
+	if (fileName == dirName)
 		dirName = "";
 
 
@@ -64,59 +64,59 @@ ObjModel::ObjModel(std::string fileName)
 	currentGroup->materialIndex = -1;
 
 
-	while(!pFile.eof())
+	while (!pFile.eof())
 	{
 		std::string line;
 		std::getline(pFile, line);
-		
+
 		line = replace(line, "\t", " ");
-		while(line.find("  ") != std::string::npos)
+		while (line.find("  ") != std::string::npos)
 			line = replace(line, "  ", " ");
-		if(line == "")
+		if (line == "")
 			continue;
-		if(line[0] == ' ')
+		if (line[0] == ' ')
 			line = line.substr(1);
-		if(line == "")
+		if (line == "")
 			continue;
-		if(line[line.length()-1] == ' ')
-			line = line.substr(0, line.length()-1);
-		if(line == "")
+		if (line[line.length() - 1] == ' ')
+			line = line.substr(0, line.length() - 1);
+		if (line == "")
 			continue;
-		if(line[0] == '#')
+		if (line[0] == '#')
 			continue;
 
 		std::vector<std::string> params = split(line, " ");
 		params[0] = toLower(params[0]);
 
-		if(params[0] == "v")
+		if (params[0] == "v")
 			vertices.push_back(Vec3f((float)atof(params[1].c_str()), (float)atof(params[2].c_str()), (float)atof(params[3].c_str())));
-		else if(params[0] == "vn")
+		else if (params[0] == "vn")
 			normals.push_back(Vec3f((float)atof(params[1].c_str()), (float)atof(params[2].c_str()), (float)atof(params[3].c_str())));
-		else if(params[0] == "vt")
+		else if (params[0] == "vt")
 			texcoords.push_back(Vec2f((float)atof(params[1].c_str()), (float)atof(params[2].c_str())));
-		else if(params[0] == "f")
+		else if (params[0] == "f")
 		{
-			for(size_t ii = 4; ii <= params.size(); ii++)
+			for (size_t ii = 4; ii <= params.size(); ii++)
 			{
 				Face face;
 
-				for(size_t i = ii-3; i < ii; i++)	//magische forlus om van quads triangles te maken ;)
+				for (size_t i = ii - 3; i < ii; i++)	//magische forlus om van quads triangles te maken ;)
 				{
 					Vertex vertex;
 					vertex.normal = 0;
-					std::vector<std::string> indices = split(params[i == (ii-3) ? 1 : i], "/");
+					std::vector<std::string> indices = split(params[i == (ii - 3) ? 1 : i], "/");
 					if (indices.size() >= 1)	//er is een positie
 						vertex.position = atoi(indices[0].c_str()) - 1;
-					if(indices.size() == 2)		//alleen texture
-						vertex.texcoord = atoi(indices[1].c_str())-1;
-					if(indices.size() == 3)		//v/t/n of v//n
+					if (indices.size() == 2)		//alleen texture
+						vertex.texcoord = atoi(indices[1].c_str()) - 1;
+					if (indices.size() == 3)		//v/t/n of v//n
 					{
-						if( indices[1] != "")
-							vertex.texcoord = atoi(indices[1].c_str())-1;
-						vertex.normal = atoi(indices[2].c_str())-1;
+						if (indices[1] != "")
+							vertex.texcoord = atoi(indices[1].c_str()) - 1;
+						vertex.normal = atoi(indices[2].c_str()) - 1;
 					}
-				
-					if (vertex.normal < 0 ||vertex.normal > normals.size())
+
+					if (vertex.normal < 0 || vertex.normal > normals.size())
 					{
 						vertex.normal = 1;
 					}
@@ -125,47 +125,47 @@ ObjModel::ObjModel(std::string fileName)
 				currentGroup->faces.push_back(face);
 			}
 		}
-		else if(params[0] == "s")
+		else if (params[0] == "s")
 		{//smoothing
 		}
-        else if(params[0] == "mtllib")
-        {
-            loadMaterialFile(dirName + "/" + params[1], dirName);
-        }
-		else if(params[0] == "usemtl")
+		else if (params[0] == "mtllib")
+		{
+			loadMaterialFile(dirName + "/" + params[1], dirName);
+		}
+		else if (params[0] == "usemtl")
 		{
 			if (currentGroup->faces.size() != 0)
 			{
 				groups.push_back(currentGroup);
 			}
-				
+
 
 			currentGroup = new ObjGroup();
 			currentGroup->materialIndex = -1;
 
-			for(size_t i = 0; i < materials.size(); i++)
+			for (size_t i = 0; i < materials.size(); i++)
 			{
 				MaterialInfo* info = materials[i];
-				if(info->name == params[1])
+				if (info->name == params[1])
 				{
 					currentGroup->materialIndex = i;
 					break;
 				}
 			}
-			if(currentGroup->materialIndex == -1)
-				std::cout<<"Could not find material name "<<params[1]<<std::endl;
+			if (currentGroup->materialIndex == -1)
+				std::cout << "Could not find material name " << params[1] << std::endl;
 		}
 	}
 	groups.push_back(currentGroup);
-	
-	
-	
+
+
+
 	for each(ObjGroup *group in groups)
 	{
 		optimise(group);
 		//cout << group->optimisedArray.size() << endl;
 		//cout << vertices.size() << endl;
-		
+
 	}
 
 
@@ -173,28 +173,28 @@ ObjModel::ObjModel(std::string fileName)
 
 void ObjModel::optimise(ObjGroup *t)
 {
-		for (Face &face : t->faces)
+	for (Face &face : t->faces)
+	{
+		for each(auto &vertex in face.vertices)
 		{
-			for each(auto &vertex in face.vertices)
+			if (normals.size() != 0)
 			{
-				if (normals.size() != 0)
-				{
-					t->optimisedArray.push_back(S_Vertex(vertices[vertex.position].x, vertices[vertex.position].y, vertices[vertex.position].z,
-						normals[vertex.normal].x, normals[vertex.normal].y, normals[vertex.normal].z,
-						texcoords[vertex.texcoord].x, texcoords[vertex.texcoord].y));
-				}
-				else
-				{
-					t->optimisedArray.push_back(S_Vertex(vertices[vertex.position].x, vertices[vertex.position].y, vertices[vertex.position].z,
-						0, 0, 0,
-						texcoords[vertex.texcoord].x, texcoords[vertex.texcoord].y));
-				}
-				
-
-				
+				t->optimisedArray.push_back(S_Vertex(vertices[vertex.position].x, vertices[vertex.position].y, vertices[vertex.position].z,
+					normals[vertex.normal].x, normals[vertex.normal].y, normals[vertex.normal].z,
+					texcoords[vertex.texcoord].x, texcoords[vertex.texcoord].y));
 			}
+			else
+			{
+				t->optimisedArray.push_back(S_Vertex(vertices[vertex.position].x, vertices[vertex.position].y, vertices[vertex.position].z,
+					0, 0, 0,
+					texcoords[vertex.texcoord].x, texcoords[vertex.texcoord].y));
+			}
+
+
+
 		}
-	
+	}
+
 }
 
 ObjModel::~ObjModel(void)
@@ -205,7 +205,7 @@ ObjModel::~ObjModel(void)
 
 
 void ObjModel::draw(Entity &entity, float scale, float rotation)
-{	
+{
 	for each(auto group in groups)
 	{
 		//zet het materiaal / texture van deze groep
@@ -240,8 +240,44 @@ void ObjModel::draw(Entity &entity, float scale, float rotation)
 		glPopMatrix();
 	}
 }
+void ObjModel::draw(float x, float y, float z, float scale, float rotation)
+{
+	for each(auto group in groups)
+	{
+		//zet het materiaal / texture van deze groep
+		ObjGroup gr = *group;
+		if (gr.materialIndex != -1)
+		{
 
-void ObjModel::loadMaterialFile( std::string fileName, std::string dirName )
+			if (materials[gr.materialIndex]->hasTexture)
+			{
+				glEnable(GL_TEXTURE_2D);
+
+				materials[gr.materialIndex]->texture->bind();
+			}
+		}
+		glPushMatrix();
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_NORMAL_ARRAY);
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+
+		glScalef(scale, scale, scale);
+		glTranslatef(x, y, z);
+		//glRotatef(rotation, 0, 1, 0);
+
+		glVertexPointer(3, GL_FLOAT, sizeof(S_Vertex), ((float*)gr.optimisedArray.data()) + 0);
+		glNormalPointer(GL_FLOAT, sizeof(S_Vertex), ((float*)gr.optimisedArray.data()) + 3);
+		glTexCoordPointer(2, GL_FLOAT, sizeof(S_Vertex), ((float*)gr.optimisedArray.data()) + 6);
+		glDrawArrays(GL_TRIANGLES, 0, gr.optimisedArray.size());
+
+		glDisableClientState(GL_VERTEX_ARRAY);
+		glDisableClientState(GL_NORMAL_ARRAY);
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+		glPopMatrix();
+	}
+}
+
+void ObjModel::loadMaterialFile(std::string fileName, std::string dirName)
 {
 	std::ifstream pFile(fileName.c_str());
 	if (!pFile.is_open())
@@ -252,49 +288,49 @@ void ObjModel::loadMaterialFile( std::string fileName, std::string dirName )
 
 	MaterialInfo* currentMaterial = NULL;
 
-	while(!pFile.eof())
+	while (!pFile.eof())
 	{
 		std::string line;
 		std::getline(pFile, line);
-		
+
 		line = replace(line, "\t", " ");
-		while(line.find("  ") != std::string::npos)
+		while (line.find("  ") != std::string::npos)
 			line = replace(line, "  ", " ");
-		if(line == "")
+		if (line == "")
 			continue;
-		if(line[0] == ' ')
+		if (line[0] == ' ')
 			line = line.substr(1);
-		if(line == "")
+		if (line == "")
 			continue;
-		if(line[line.length()-1] == ' ')
-			line = line.substr(0, line.length()-1);
-		if(line == "")
+		if (line[line.length() - 1] == ' ')
+			line = line.substr(0, line.length() - 1);
+		if (line == "")
 			continue;
-		if(line[0] == '#')
+		if (line[0] == '#')
 			continue;
 
 		std::vector<std::string> params = split(line, " ");
 		params[0] = toLower(params[0]);
 
-		if(params[0] == "newmtl")
+		if (params[0] == "newmtl")
 		{
-			if(currentMaterial != NULL)
+			if (currentMaterial != NULL)
 			{
 				materials.push_back(currentMaterial);
 			}
 			currentMaterial = new MaterialInfo();
 			currentMaterial->name = params[1];
 		}
-		else if(params[0] == "map_kd")
+		else if (params[0] == "map_kd")
 		{
 			currentMaterial->hasTexture = true;
 			currentMaterial->texture = new ObjTexture(dirName + "/" + params[1]);
 			//cout << "cmon" << endl;
 		}
 		else
-			std::cout<<"Didn't parse "<<params[0]<<" in material file"<<std::endl;
+			std::cout << "Didn't parse " << params[0] << " in material file" << std::endl;
 	}
-	if(currentMaterial != NULL)
+	if (currentMaterial != NULL)
 		materials.push_back(currentMaterial);
 
 }

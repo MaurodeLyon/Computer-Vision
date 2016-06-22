@@ -7,7 +7,7 @@ int main(int argc, char* argv[])
 {
 	srand(time(NULL));
 	glutInit(&argc, argv);
-	//LeapController * leap = new LeapController();
+	LeapController * leap = new LeapController();
 	Window* window = new Window();
 	ObjLibrary* lib = new ObjLibrary();
 	lib->loadObjects();

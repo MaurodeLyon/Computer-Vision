@@ -11,6 +11,8 @@ void CollisionComponent::update(Entity& entity)
 
 	for each(Component * shipComponent in entity.getComponents())
 		if (dynamic_cast<const ShipComponent*>(shipComponent) != nullptr) //entity is a ship		
+		{
+			ShipComponent * ship = (ShipComponent*)shipComponent;
 			for each(Component * collisionComponent in entity.getComponents())
 				if (dynamic_cast<const CollisionComponent*>(collisionComponent) != nullptr) // get collisioncomponent of ship
 				{
@@ -28,12 +30,13 @@ void CollisionComponent::update(Entity& entity)
 											bool collision = distance < radius;
 											if (collision)
 											{
-												cout << this->distance(astroidCollision->position[0], astroidCollision->position[1], astroidCollision->position[2]) << endl;
 												//collision with astroid
+												ship->setHealth(ship->getHealth() - 1);
 												other_entity->alive = false;
 											}
 										}
 				}
+		}
 }
 
 /*check if 2 circles intersect*/

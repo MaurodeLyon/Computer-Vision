@@ -44,6 +44,7 @@ public:
 	~ObjModel(void);
 
 	void draw(Entity &entity, float scale, float rotation);
+	void draw(float x, float y, float z, float scale, float rotation);
 private:
 	class Vertex
 	{
@@ -58,7 +59,7 @@ private:
 	public:
 		list<Vertex> vertices;
 	};
-	
+
 	class MaterialInfo
 	{
 	public:
@@ -76,7 +77,7 @@ private:
 		list<Face> faces;
 		std::vector<S_Vertex> optimisedArray;
 	};
-	
+
 	vector<Vec3f>	vertices;
 	vector<Vec3f>	normals;
 	vector<Vec2f>	texcoords;

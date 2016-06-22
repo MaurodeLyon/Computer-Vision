@@ -5,8 +5,7 @@
 class Node
 {
 public:
-	Node(ObjModel* model, float rotationX, float rotationY, float rotationZ, float x, float y, float z, float sx, float sy, float sz)
-		:model(model), rotationX(rotationX), rotationY(rotationY), rotationZ(rotationZ), x(x), y(y), z(z), sx(sx), sy(sy), sz(sz) {};
+	Node(ObjModel* model, float rotationX, float rotationY, float rotationZ, float x, float y, float z, float sx, float sy, float sz) :model(model), rotationX(rotationX), rotationY(rotationY), rotationZ(rotationZ), x(x), y(y), z(z), sx(sx), sy(sy), sz(sz) {};
 	~Node() {};
 
 	void addNode(Node* node)

@@ -4,6 +4,8 @@
 using namespace std;
 
 extern std::vector<Entity*> entities;
+extern int x;
+extern int y;
 
 void LeapController::onConnect(const Controller& controller)
 {
@@ -13,6 +15,8 @@ void LeapController::onConnect(const Controller& controller)
 void LeapController::onFrame(const Controller& controller)
 {
 	auto frame = controller.frame();
+	x = frame.hands().rightmost().palmPosition().x;
+	y = frame.hands().rightmost().palmPosition().y -200;
 }
 
 LeapController::LeapController()
