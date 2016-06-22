@@ -8,9 +8,8 @@ void SpawnerComponent::update(Entity& entity)
 {
 	if (timer <= 0)
 	{
-
 		Entity * astroid = new Entity((rand() % 500) - 250, (rand() % 500) - 250, entity.z);
-		astroid->addComponent(new ObjModelComponent(objectLibrary[11].second));
+		astroid->addComponent(new ObjModelComponent(objectLibrary[4].second));
 		astroid->addComponent(new AstroidComponent((rand() % 4) + 1));
 		astroid->addComponent(new CollisionComponent(5));
 		entitiesToAdd.push_back(astroid);

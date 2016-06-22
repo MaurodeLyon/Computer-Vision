@@ -16,7 +16,7 @@ void ShipComponent::render(Entity& entity)
 {
 	for (int i = 0; i < health; i++)
 	{
-		auto * model = objectLibrary[4].second;
+		auto * model = objectLibrary[2].second;
 
 		float orbx = (cos((360 - (360 / health * i)) * PI / 180.0) * 25);
 		float orby = 0;
