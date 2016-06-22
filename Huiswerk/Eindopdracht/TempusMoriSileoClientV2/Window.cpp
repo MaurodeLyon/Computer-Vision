@@ -32,9 +32,11 @@ void update(int value)
 		entitiesToAdd.clear();
 	}
 
-	for each(Entity * e in entities) {
-		e->update();
-	}
+	entities.erase(std::remove_if(entities.begin(), entities.end(), [](Entity* entity)
+	{
+		entity->update();
+		return !entity->alive;
+	}), entities.end());
 	entitiesLock.unlock();
 }
 
@@ -134,7 +136,10 @@ void Window::display()
 	gluPerspective(90, 1, 0.1f, 15000);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	gluLookAt(0, 150, 250, 0, 0, 0, 0, 1, 0);
+	gluLookAt(x, y, 250,
+		x, y, 0,
+		0, 1, 0);
+	//gluLookAt(0, 150, 250, 0, 0, 0, 0, 1, 0);
 	//gluLookAt(leapx, leapy, leapz - 100, 0, 0, 0, 0, 1, 0);
 
 	//render entities

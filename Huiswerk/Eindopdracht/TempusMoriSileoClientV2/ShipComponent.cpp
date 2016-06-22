@@ -8,5 +8,4 @@ void ShipComponent::update(Entity& entity)
 {
 	entity.x = x;
 	entity.y = y;
-	cout << entity.x << "	" << entity.y << endl;
 }

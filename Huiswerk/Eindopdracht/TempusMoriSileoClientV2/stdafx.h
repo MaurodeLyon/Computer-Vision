@@ -34,7 +34,7 @@
 #include "ObjModelComponent.h"
 #include "AudioComponent.h"
 
-
+#include "CollisionComponent.h"
 #include "SpawnerComponent.h"
 #include "ShipComponent.h"
 #include "AstroidComponent.h"
