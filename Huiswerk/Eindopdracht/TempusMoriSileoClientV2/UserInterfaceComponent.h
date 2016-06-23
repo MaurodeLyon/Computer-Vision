@@ -4,7 +4,6 @@ class UserInterfaceComponent : public Component
 {
 public:
 	int DeathCount;
-
 	UserInterfaceComponent() : DeathCount(0) {};
 	~UserInterfaceComponent() {};
 

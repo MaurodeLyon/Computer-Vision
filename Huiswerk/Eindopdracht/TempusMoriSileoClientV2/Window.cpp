@@ -16,6 +16,8 @@ bool inMenu = true;
 bool inGame = false;
 bool toggle = true;
 float rot = 0;
+int score;
+int highscore;
 
 void update(int value)
 {
@@ -47,7 +49,7 @@ Window::Window()
 	glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
 	glutInitWindowSize(1280, 800);
 	glutCreateWindow("Dodger");
-	//glutFullScreen();
+	glutFullScreen();
 
 	glEnable(GL_DEPTH_TEST);
 	glEnable(GL_TEXTURE_2D);
@@ -126,12 +128,15 @@ void Window::keyboard(unsigned char key, int, int)
 	if (key == 'r') z += 5;
 	if (key == ' ')
 	{
-		audio.play("res/music/collision.mp3",false,1);
+		audio.play("res/music/collision.mp3", false, 1);
 		auto * ship = new Entity();
 		ship->addComponent(new ObjModelComponent(objectLibrary[1].second));
 		ship->addComponent(new ShipComponent());
 		ship->addComponent(new CollisionComponent(20));
 		entitiesToAdd.push_back(ship);
+		if (highscore < score)
+			highscore = score;
+		score = 0;
 	}
 	if (key == 27) exit(0);
 }
@@ -164,10 +169,10 @@ void Window::display()
 		Entity* e = *it;
 		//if (e->alive)
 		//{
-			glPushMatrix();
-			e->render();
-			glPopMatrix();
-			++it;
+		glPushMatrix();
+		e->render();
+		glPopMatrix();
+		++it;
 		//}
 	}
 	entitiesLock.unlock();

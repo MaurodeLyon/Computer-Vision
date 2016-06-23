@@ -3,6 +3,7 @@
 
 extern std::vector<Entity*> entities;
 extern Audio audio;
+extern int score;
 
 void CollisionComponent::update(Entity& entity)
 {
@@ -13,6 +14,7 @@ void CollisionComponent::update(Entity& entity)
 	for each(Component * shipComponent in entity.getComponents())
 		if (dynamic_cast<const ShipComponent*>(shipComponent) != nullptr) //entity is a ship		
 		{
+			score++;
 			ShipComponent * ship = (ShipComponent*)shipComponent;
 			for each(Component * collisionComponent in entity.getComponents())
 				if (dynamic_cast<const CollisionComponent*>(collisionComponent) != nullptr) // get collisioncomponent of ship
